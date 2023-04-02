@@ -44,7 +44,8 @@ async function rekognize(imageBytes) {
 
 exports.handler = async (event) => {
   let response = null;
-  const objectKey = event.Records[0].s3.object.key;
+  const encodedObjectKey = event.Records[0].s3.object.key;
+  const objectKey = decodeURIComponent(encodedObjectKey);
   try {
     response = await s3
       .getObject({ Bucket: UPLOAD_BUCKET_NAME, Key: objectKey })
