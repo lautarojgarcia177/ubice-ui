@@ -3,10 +3,12 @@ import App from "./App";
 import ErrorPage from "./pages/ErrorPage";
 import Root from "./pages/Root";
 import UploadPhotos from "./pages/UploadPhotos";
+import DownLoadPhotos from "./pages/DownloadPhotos";
 
 export const routes = {
   root: "/",
   uploadPhotos: "uploadPhotos",
+  downloadPhotos: "downloadPhotos",
 };
 
 export const router = createBrowserRouter([
@@ -22,6 +24,10 @@ export const router = createBrowserRouter([
       {
         path: routes.uploadPhotos,
         element: <UploadPhotos />,
+      },
+      {
+        path: routes.downloadPhotos,
+        element: <DownLoadPhotos />
       }
     ],
   },

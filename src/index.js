@@ -6,7 +6,13 @@ import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routing";
+import dotenv from "dotenv";
+
+dotenv.config();
 Amplify.configure(awsExports);
+
+// ... (rest of the code)
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

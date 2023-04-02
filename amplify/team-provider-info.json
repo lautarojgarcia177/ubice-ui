@@ -24,7 +24,7 @@
       "function": {
         "S3Trigger552929f4": {
           "deploymentBucketName": "amplify-ubiceui-dev-150429-deployment",
-          "s3Key": "amplify-builds/S3Trigger552929f4-59454562757a67786551-build.zip"
+          "s3Key": "amplify-builds/S3Trigger552929f4-33763064335039585448-build.zip"
         }
       },
       "storage": {

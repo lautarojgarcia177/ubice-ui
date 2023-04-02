@@ -7,6 +7,7 @@ export default function NavigationMenu({ signOut }) {
   return (
     <Menu>
       <MenuItem onClick={() => navigate(routes.uploadPhotos)}>Subir fotos</MenuItem>
+      <MenuItem onClick={() => navigate(routes.downloadPhotos)}>Descargar paquete de fotos reconocidas</MenuItem>
       <MenuItem onClick={() => signOut()}>Cerrar sesión</MenuItem>
     </Menu>
   );

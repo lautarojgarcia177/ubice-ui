@@ -1,0 +1,17 @@
+.file-upload-container {
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.file-upload-container.dragging {
+  border-color: #000;
+}
+
+.file-upload-container input[type="file"] {
+  display: none;
+}

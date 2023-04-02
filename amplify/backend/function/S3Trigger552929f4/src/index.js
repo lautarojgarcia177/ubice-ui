@@ -3,6 +3,7 @@ const s3 = new AWS.S3();
 const rekognitionClient = new AWS.Rekognition();
 const axios = require("axios");
 const FormData = require("form-data");
+const { v4: uuidv4 } = require("uuid");
 
 const useRegex = (input) => {
   let regex = /^[0-9]+$/i;
@@ -14,6 +15,10 @@ const DESTINATION_BUCKET_NAME = "ubice";
 
 const EXIFTOOL_EC2_INSTANCE_IP = "54.193.233.36";
 const EXIFTOOL_EC2_INSTANCE_PORT = 3000;
+
+function extractPhotoName(s3ObjectPath) {
+  return s3ObjectPath.split('/').pop();
+}
 
 async function rekognize(imageBytes) {
   try {
@@ -43,6 +48,7 @@ async function rekognize(imageBytes) {
 }
 
 exports.handler = async (event) => {
+  
   let response = null;
   const encodedObjectKey = event.Records[0].s3.object.key;
   const objectKey = decodeURIComponent(encodedObjectKey);
@@ -76,10 +82,14 @@ exports.handler = async (event) => {
     // throw new Error("Error writing on image metadata with exiftool: ", +err);
   }
   try {
+    //format of new object key should be: <numero de evento>/<nombre del fotografo>/<uploadId>/<photoName>.jpg
+    const uploadId = uuidv4();
+    const photoName = extractPhotoName(objectKey)
+    const newObjectKey = `${uploadId}/${photoName}`;
     await s3
       .putObject({
         Bucket: DESTINATION_BUCKET_NAME,
-        Key: objectKey,
+        Key: newObjectKey,
         Body: imageBuffer,
         ContentType: "image/jpeg",
       })
